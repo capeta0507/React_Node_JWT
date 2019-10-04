@@ -1,0 +1,25 @@
+.logo{
+  width: 100px;
+}
+.title{
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 120px;
+}
+.cardImg{
+  width: 100%;
+  height: 200px;  
+  display: block;
+}
+.result{
+  font-size: 20px;
+}
+.result > li{
+  list-style: none;
+}
+.footer{
+  /* text-align: center; */
+  color: #fff;
+  line-height: 25px;
+  padding: 10px
+}
