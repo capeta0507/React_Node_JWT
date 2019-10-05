@@ -26,6 +26,9 @@ app.set('secret', config.secret);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+// 提供靜態檔案顯示
+app.use('/html', express.static(__dirname + '/html'));
+
 app.get('/', function (req, res) {
   res.send('Hi, The API is at http://localhost:' + PORT + '/api')
 });
