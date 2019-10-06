@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JWT功能</title>
+</head>
+<body>
+  <h1>JWT 功能測試</h1>
+  <button onclick="getRoot();">取得 /</button>
+  <button onclick="getToken();">取得 Token</button></br>
+  <textarea rows="6" cols="70" id='myToken'> (Token) </textarea></body></br>
+  <button onclick="getUsers();">取得 Users /</button>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+
+  function getRoot(){
+    // document.getElementById("myToken").value='xxx'
+    $.ajax({
+      method: 'GET',
+      url: '/',
+      error:(err)=>{
+        console.log('Ajax request 發生錯誤...')
+      },
+      success:(response)=>{
+        console.log('GET:/',response);
+        document.getElementById("myToken").value= response
+      }
+    })
+  }
+
+  function getToken(){
+    // document.getElementById("myToken").value='xxx'
+    $.ajax({
+      method: 'POST',
+      url: '/api/login',
+      data:{
+        login: 'davidtpe',
+        password: '123456'
+      }
+    }
+    ).then((response)=>{
+      console.log('POST:/api/login',response);
+      document.getElementById("myToken").value= response.token
+    })
+  }
+
+  function getUsers(){
+    let myToken = document.getElementById("myToken").value
+    console.log('採用驗證Token:',myToken);
+
+    // $.ajax({
+    //   method: 'GET',
+    //   url: "/api/users?token=" + myToken,
+    // }
+    // ).then((response)=>{
+    //   console.log('GET:/api/users?token=???',response.data);
+    // })
+
+    $.ajax({
+      method: 'GET',
+      url: "/api/users",
+      data:{
+        token: myToken
+      }
+    }).then((response)=>{
+      console.log('GET:/api/users data:token ',response.data);
+    })
+
+    // $.ajax({
+    //   method: 'GET',
+    //   url: "/api/users",
+    //   headers:{
+    //     'x-access-token':myToken
+    //   },
+    // }
+    // ).then((response)=>{
+    //   console.log('GET:/api/users headers:x-access-token ',response.data);
+    // })
+
+    // $.ajax({
+    //   method: 'GET',
+    //   url: "/api/users",
+    //   headers:{
+    //     'Content-Type': 'application/x-www-form-urlencoded'
+    //   },
+    //   data:{
+    //     token: myToken
+    //   }
+    // }
+    // ).then((response)=>{
+    //   console.log('GET:/api/users headers:Content-Type ',response.data);
+    // }).catch(err=>{
+    //   console.log('----錯誤-----');
+    //   console.log(err);
+    // })
+
+    // $.get({
+    //   url: "/api/users",
+    //   data:{
+    //     token: myToken
+    //   }
+    // }).then((response)=>{
+    //   console.log('GET:/api/users $.get()',response.data);
+    // })
+
+  }
+
+</script>
+</html>
