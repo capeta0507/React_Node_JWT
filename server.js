@@ -76,7 +76,8 @@ app.post('/adduser', function (req, res) {
 // 實做 api route
 var api = express.Router()
 
-// 使用者驗證 , 不須 middleware驗證token
+// 使用者登入，傳送前端驗證Token , 不須 middleware驗證token
+// (POST) http://localhost:5000/api/login 
 api.post('/login',(req,res)=>{
   console.log(req.body.login);
   console.log(req.body.password);
@@ -87,6 +88,7 @@ api.post('/login',(req,res)=>{
   //   password: req.body.password
   // });
 
+  // MongoDB 找尋使用者
   User.findOne({
     login: req.body.login
   },(err,loginUser)=>{
@@ -99,11 +101,12 @@ api.post('/login',(req,res)=>{
         message: 'Login User 帳密不存在，請建立新使用者'
       })
     }
+    // 判斷密碼是否正確
     if(loginUser.password != req.body.password){
       res.json({
         success: false,
         message: 'Login User 帳密驗證錯誤',
-        token: "error"
+        token: ""
       })
     }else {
       // console.log('loginUser');
@@ -122,7 +125,9 @@ api.post('/login',(req,res)=>{
       res.json({
         success: true,
         message: '認證成功...',
-        token: token
+        token: token,
+        login : loginUser.login,
+        name: loginUser.name
       })
     }
   });
@@ -135,7 +140,7 @@ api.get('/',(req,res)=>{
   })
 });
 
-// 顯示所有使用者，要 middleware驗證toke，
+// 顯示所有使用者，要 middleware驗證Token，
 api.get('/users', verifyToken , (req, res)=> {
   User.find({}, function (err, users) {
     res.status(200).json({
