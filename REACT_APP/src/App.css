@@ -23,3 +23,9 @@
   line-height: 25px;
   padding: 10px
 }
+.loginForm{
+  width: 60%;
+  margin: 20px auto;
+  border: 1px solid black;
+  padding: 20px;
+}

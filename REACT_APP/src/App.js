@@ -4,6 +4,7 @@ import Navbar from './components/navbar';
 import Footer from './components/footer'
 import Home from './components/home'
 import About from './components/about'
+import Login from './components/login'
 import './App.css';
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
               <Route exact path='/about' render={() => (
                 <About />
               )}/>
+              <Route exact path='/login' component={Login} />
             </Switch>
           </div>
           <Footer />
