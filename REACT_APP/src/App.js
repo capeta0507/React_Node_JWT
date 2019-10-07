@@ -19,7 +19,9 @@ class App extends Component {
               <Route exact path='/about' render={() => (
                 <About />
               )}/>
-              <Route exact path='/login' component={Login} />
+              <Route exact path='/login' render={({history}) => (
+                <Login onHistory={history}/>
+              )}/>
             </Switch>
           </div>
           <Footer />

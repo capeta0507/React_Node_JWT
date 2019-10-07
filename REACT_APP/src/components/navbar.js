@@ -25,10 +25,10 @@ const Navbar = () => {
                     </li>
                     </ul>
                 </div>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <NavLink to='/login' class="nav-link" href="#">
+                <div className="collapse navbar-collapse" id="navbarResponsive">
+                    <ul className="navbar-nav ml-auto">
+                        <li className="nav-item active">
+                            <NavLink to='/login' className="nav-link" href="#">
                                 Login
                             </NavLink>
                         </li>
