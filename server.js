@@ -76,6 +76,14 @@ app.post('/adduser', function (req, res) {
 // 實做 api route
 var api = express.Router()
 
+// API 根目錄，不須 middleware驗證token
+api.get('/',(req,res)=>{
+  res.json({
+    success: true,
+    message: 'This is API Route ...'
+  })
+});
+
 // 使用者登入，傳送前端驗證Token , 不須 middleware驗證token
 // (POST) http://localhost:5000/api/login 
 api.post('/login',(req,res)=>{
@@ -132,13 +140,6 @@ api.post('/login',(req,res)=>{
     }
   });
 })
-// API 根目錄，不須 middleware驗證token
-api.get('/',(req,res)=>{
-  res.json({
-    success: true,
-    message: 'This is API Route ...'
-  })
-});
 
 // 顯示所有使用者，要 middleware驗證Token，
 api.get('/users', verifyToken , (req, res)=> {
