@@ -19,9 +19,10 @@ const Login = (props) => {
             console.log(response.data);
             console.log(response.data.success);
             if(response.data.success === true){
-                window.sessionStorage.setItem('user',response.data.name)
+                window.sessionStorage.setItem('name',response.data.name)
                 window.sessionStorage.setItem('token',response.data.token)
                 window.sessionStorage.setItem('user',response.data.login)
+                window.sessionStorage.setItem('res',response.data.success)
                 props.onHistory.push('/')
             } else if(response.data.success === false){
                 return false

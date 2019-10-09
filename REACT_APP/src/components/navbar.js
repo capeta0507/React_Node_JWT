@@ -1,7 +1,18 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Link, NavLink} from 'react-router-dom'
 
 const Navbar = () => {
+    const [loginStatus, setLoginStatus] = useState(false)
+    const [userName, setUserName] = useState('')
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const LStatus = window.sessionStorage.getItem('res')
+            const name = window.sessionStorage.getItem('name')
+            setLoginStatus(!!LStatus)
+            setUserName(name)
+        }
+    }, [])
+    console.log('loginStatus', loginStatus)
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">
@@ -28,9 +39,24 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item active">
-                            <NavLink to='/login' className="nav-link" href="#">
-                                Login
-                            </NavLink>
+                            {(() => {
+                                if(loginStatus === true){
+                                    return(
+                                        <>
+                                            <NavLink to='/login' className="nav-link">
+                                            {userName}/Logout
+                                            </NavLink>
+                                        </>
+                                    )
+                                } else {
+                                    return(
+                                        <NavLink to='/login' className="nav-link">
+                                             Login
+                                         </NavLink> 
+                                     ) 
+                                }
+                            })()}
+                            
                         </li>
                     </ul>
                 </div>
