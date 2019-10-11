@@ -4,6 +4,18 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+// Send eMail
+// 載入模組並設定使用的服務、帳號、密碼。這裡使用方便的 Gmail 寄信
+// 設定
+var nodemailer = require('nodemailer');
+var mailTransport = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: 'davidtpe99@gmail.com',
+    pass: 'vsvahllcjjfpwyni' // 認證密碼
+  }
+});
+
 // 載入 jwt 函式庫協助處理建立/驗證 token
 var jwt = require('jsonwebtoken');
 // 載入設定
@@ -72,6 +84,100 @@ app.post('/adduser', function (req, res) {
     })
   }
 })
+
+// 忘記密碼處理
+// 取得使用者所傳送過來的 Login，取得使用者的eMail，回傳 eMail 
+// 如果沒有 Login 資料，傳回錯誤訊息，讓使用者去註冊
+// 如果有 Login 資料，回傳 eMail 帳號
+app.post('/getemail',(req,res)=>{
+  console.log("LOGIN : ",req.body.login);
+  // MongoDB 找尋使用者r
+  User.findOne({
+    login:req.body.login
+  },(err,loginUser)=>{
+    if (err){
+      res.json({
+        success:false,
+        message:"MongoDB Error ..."
+      })
+    }
+    if (!loginUser){
+      res.json({
+        success:false,
+        message:"Login使用者不存在，建議使用者進行註冊"
+      })
+    }else{
+      res.json({
+        success:true,
+        message:"Login使用者存在，建議使用者進行新的密碼寄送",
+        login : loginUser.login,
+        name : loginUser.name,
+        email:loginUser.email
+      })
+    }
+  })
+})
+
+// 修改密碼
+// 系統根據Login & eMail 產生新的密碼
+// 密碼根據亂數計算，產生6位數字密碼
+// 密碼寫回資料庫，並要求使用者以新密碼登入&立即修改密碼
+app.get('/newpassword',(req,res)=>{
+  console.log("LOGIN : ",req.body.login);
+  console.log("eMail : ",req.body.email);
+  let myRandom = ['xK','Yr','Wh']
+  // 產生新的密碼
+  let newPassword = '';
+  for(x=0;x<3;x++){
+    newPassword += Math.floor(Math.random() * Math.floor(10));
+    newPassword += myRandom[x];
+  }
+
+  // 新密碼寫回資料庫
+  User.findOneAndUpdate({
+    login:req.body.login
+  },
+  {
+    $set: {password: newPassword}
+  },(err,doc)=>{
+    if (err){
+      json({
+        success:false,
+        message:"新密碼資料庫寫回錯誤",
+        error:err
+      })
+    }else{
+      // 寄信
+      mailTransport.sendMail(
+        {
+          from: 'David 詹 <davidtpe99@gmail.com>',
+          to: req.body.email,
+          subject: "JWT 使用者新密碼",
+          html: `<h1>${req.body.login}</h1><p>您的在網站上申請新的密碼...</p><p>密碼如下 : ${newPassword}</p>`
+        },(err)=>{
+          if (err){
+            // console.log('nodemailer 寄送錯誤');
+            // console.log(err);
+            res.json({
+              success:false,
+              message:"nodemailer 寄送錯誤",
+              error:err
+            })
+          }else {
+            // console.log(`nodemailer 寄送成功，請 ${req.body.email} 收信看看`);
+            // console.log('nodemailer ... 程式完成...');
+            res.json({
+              success:true,
+              message:`新密碼寄送成功，請 ${req.body.email} 收信看看`,
+              password:newPassword
+            })
+          }
+        }
+      );
+    }
+  })
+})
+
 
 // 實做 api route
 var api = express.Router()
