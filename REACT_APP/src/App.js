@@ -5,6 +5,7 @@ import Footer from './components/footer'
 import Home from './components/home'
 import About from './components/about'
 import Login from './components/login'
+import Data from './components/data'
 import './App.css';
 
 class App extends Component {
@@ -21,6 +22,9 @@ class App extends Component {
               )}/>
               <Route exact path='/login' render={({history}) => (
                 <Login onHistory={history}/>
+              )}/>
+              <Route exact path='/data' render={() => (
+                <Data />
               )}/>
             </Switch>
           </div>

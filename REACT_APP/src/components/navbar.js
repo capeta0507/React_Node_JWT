@@ -2,17 +2,21 @@ import React, {useState, useEffect} from 'react'
 import {Link, NavLink} from 'react-router-dom'
 
 const Navbar = () => {
-    const [loginStatus, setLoginStatus] = useState(false)
+    const [isLogin, setIsLogin] = useState(false)
     const [userName, setUserName] = useState('')
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            const LStatus = window.sessionStorage.getItem('res')
+            const LoginStatus = window.sessionStorage.getItem('res')
             const name = window.sessionStorage.getItem('name')
-            setLoginStatus(!!LStatus)
+            setIsLogin(!!LoginStatus)
             setUserName(name)
         }
     }, [])
-    console.log('loginStatus', loginStatus)
+    console.log('isLogin', isLogin)
+    const logout = () => {
+        window.sessionStorage.clear()
+        window.location.href = `${window.location.origin}`
+    }
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">
@@ -32,20 +36,35 @@ const Navbar = () => {
                         <NavLink to='/about' className="nav-link" href="#">About</NavLink>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">資料</a>
+                        {(() => {
+                            if(isLogin === true){
+                                return(
+                                    <>
+                                        <NavLink to='/data' className="nav-link" href="">資料</NavLink>
+                                    </>
+                                )
+                            } else {
+                                return(
+                                    <NavLink to='/login' className="nav-link">
+                                        資料(請先登入)
+                                    </NavLink> 
+                                ) 
+                            }
+                        })()}
+                        
                     </li>
                     </ul>
                 </div>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item active">
+                        <li className="nav-item">
                             {(() => {
-                                if(loginStatus === true){
+                                if(isLogin === true){
                                     return(
                                         <>
-                                            <NavLink to='/login' className="nav-link">
-                                            {userName}/Logout
-                                            </NavLink>
+                                            <div className="nav-link myLogout" onClick={logout}>
+                                                {userName}/Logout
+                                            </div>
                                         </>
                                     )
                                 } else {

@@ -4,7 +4,6 @@ import axios from 'axios'
 const Login = (props) => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
-
     const submit = () => {
         // console.log(login,password,'登入')
         axios({
@@ -23,7 +22,9 @@ const Login = (props) => {
                 window.sessionStorage.setItem('token',response.data.token)
                 window.sessionStorage.setItem('user',response.data.login)
                 window.sessionStorage.setItem('res',response.data.success)
-                props.onHistory.push('/')
+                // props.onHistory.push('/')
+                // 跳轉
+                window.location.href = `${window.location.origin}`
             } else if(response.data.success === false){
                 return false
             }
