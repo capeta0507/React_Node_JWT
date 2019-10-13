@@ -1,6 +1,6 @@
 # Node.js JWT 認證機制 API
 
-參考文件
+### 參考文件
 > [Node 實作 jwt 驗證 API](https://andyyou.github.io/2016/06/09/implement-jwt-with-understanding/)
 
 >[SON Web Token Authentication in React and react-router](https://hptechblogs.com/using-json-web-token-react/)
@@ -21,6 +21,19 @@
 
 > [Securing your Node js api with JSON Web Token](https://dev.to/medaymentn/securing-your-node-js-api-with-json-web-token-5o5)
 
+### 設計說明
+系統主要是要表現以下功能：
+1. 客戶註冊
+2. 登入，JWT授權
+3. JWT安全認證，可以查看敏感資料
+4. 忘記密碼處理流程
+5. 客戶資料維護
+
+### 系統架構
+1. 前端：React.js
+2. 後端：Node.js + Express
+3. 資料庫：MongoDB
+4. 安全認證：jsonwebtoken(JWT)
 
 使用者 名單
 ```json=
