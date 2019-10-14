@@ -40,10 +40,12 @@ app.use(bodyParser.json());
 
 // 提供靜態檔案顯示
 app.use('/html', express.static(__dirname + '/html'));
+// 提供React build 靜態檔案顯示
+app.use('/', express.static(__dirname + '/REACT_APP/build'));
 
-app.get('/', function (req, res) {
-  res.send('Hi, The API is at http://localhost:' + PORT + '/api')
-});
+// app.get('/', function (req, res) {
+//   res.send('Hi, The API is at http://localhost:' + PORT + '/api')
+// });
 
 // 建立使用者
 app.post('/adduser', function (req, res) {
