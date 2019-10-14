@@ -1,6 +1,20 @@
 .logo{
   width: 100px;
 }
+#root{
+  /* 設定高度最小為100%, 如果內容區塊很多, 可以長大 */
+  min-height: 100%;
+  /* 位置設為relative, 作為footer區塊位置的參考 */
+  position: relative;
+  /* padding-bottom: 100px;   */
+  box-sizing: border-box;
+}
+.myHome{
+  padding-bottom: 48rem;  
+}
+.main{
+  margin-bottom: 38rem;
+}
 .title{
   text-align: center;
   margin-top: 20px;
@@ -21,7 +35,7 @@
   /* text-align: center; */
   color: #fff;
   line-height: 25px;
-  padding: 10px
+  padding: 10px;
 }
 .loginForm{
   width: 60%;
