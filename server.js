@@ -214,6 +214,8 @@ api.post('/login',(req,res)=>{
     if (!loginUser){
       res.json({
         success: false,
+        login_check: false,
+        password_check: false,
         message: 'Login User 帳密不存在，請建立新使用者'
       })
     }
@@ -221,6 +223,8 @@ api.post('/login',(req,res)=>{
     if(loginUser.password != req.body.password){
       res.json({
         success: false,
+        login_check: true,
+        password_check: false,
         message: 'Login User 帳密驗證錯誤',
         token: ""
       })
