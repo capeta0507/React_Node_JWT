@@ -38,14 +38,14 @@ app.set('secret', config.secret);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-// 提供靜態檔案顯示
+// TODO:提供靜態檔案顯示
 app.use('/html', express.static(__dirname + '/html'));
 // 提供React build 靜態檔案顯示
-app.use('/', express.static(__dirname + '/REACT_APP/build'));
+// app.use('/', express.static(__dirname + '/REACT_APP/build'));
 
-// app.get('/', function (req, res) {
-//   res.send('Hi, The API is at http://localhost:' + PORT + '/api')
-// });
+app.get('/', function (req, res) {
+  res.send('Hi, The API is at http://localhost:' + PORT + '/api')
+});
 
 // 建立使用者 (註冊)
 app.post('/adduser', function (req, res) {
@@ -102,6 +102,7 @@ app.post('/getemail',(req,res)=>{
         success:false,
         message:"MongoDB Error ..."
       })
+      return false;
     }
     if (!loginUser){
       res.json({
@@ -208,8 +209,14 @@ api.post('/login',(req,res)=>{
   User.findOne({
     login: req.body.login
   },(err,loginUser)=>{
-    // FIXME:處理錯誤訊息
-    if (err) throw err;
+    // 處理錯誤訊息
+    if (err) {
+      res.json({
+        success: false,
+        error: err,
+        message: 'MongoDB 資料庫 錯誤 ...'
+      })
+    }
     // res.json(loginUser);
     if (!loginUser){
       res.json({
@@ -218,6 +225,7 @@ api.post('/login',(req,res)=>{
         password_check: false,
         message: 'Login User 帳密不存在，請建立新使用者'
       })
+      return false;
     }
     // 判斷密碼是否正確
     if(loginUser.password != req.body.password){
@@ -228,6 +236,7 @@ api.post('/login',(req,res)=>{
         message: 'Login User 帳密驗證錯誤',
         token: ""
       })
+      return false;
     }else {
       // console.log('loginUser');
       // console.log(loginUser);
