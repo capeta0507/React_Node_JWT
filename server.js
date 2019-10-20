@@ -208,7 +208,7 @@ api.post('/login',(req,res)=>{
   User.findOne({
     login: req.body.login
   },(err,loginUser)=>{
-
+    // FIXME:處理錯誤訊息
     if (err) throw err;
     // res.json(loginUser);
     if (!loginUser){
