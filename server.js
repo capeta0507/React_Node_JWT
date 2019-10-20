@@ -47,7 +47,7 @@ app.use('/', express.static(__dirname + '/REACT_APP/build'));
 //   res.send('Hi, The API is at http://localhost:' + PORT + '/api')
 // });
 
-// 建立使用者
+// 建立使用者 (註冊)
 app.post('/adduser', function (req, res) {
   // 解析 req.body 所傳送過來的資料 (必須全部存在) 
   if (!req.body.name || !req.body.email || !req.body.login || !req.body.password) {
@@ -244,6 +244,8 @@ api.post('/login',(req,res)=>{
       // 回傳認證成功 JWT Token
       res.json({
         success: true,
+        login_check: true,
+        password_check: true,
         message: '認證成功...',
         token: token,
         login : loginUser.login,
