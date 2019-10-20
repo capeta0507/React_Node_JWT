@@ -12,7 +12,7 @@ const Navbar = () => {
             setUserName(name)
         }
     }, [])
-    console.log('isLogin', isLogin)
+    // console.log('isLogin', isLogin)
     const logout = () => {
         window.sessionStorage.clear()
         window.location.href = `${window.location.origin}`

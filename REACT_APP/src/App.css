@@ -46,3 +46,9 @@
 .myLogout{
   cursor: pointer;
 }
+.reBtn{
+  margin-left: 10px;;
+}
+.height{
+  height: 84vh;
+}

@@ -1,5 +1,6 @@
 import React,{ useState } from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 const Login = (props) => {
     const [login, setLogin] = useState('')
@@ -31,10 +32,19 @@ const Login = (props) => {
                     window.sessionStorage.setItem('res',response.data.success)
                     // props.onHistory.push('/')
                     // 跳轉
+                    alert('登入成功')
                     window.location.href = `${window.location.origin}`
                 }
-                if(response.data.success === false){
-                    alert('帳號或密碼有誤')
+                // if(response.data.success === false){
+                //     alert('帳號或密碼有誤')
+                //     return false
+                // }
+                if(response.data.login_check === false){
+                    alert('帳號有誤')
+                    return false
+                }
+                if(response.data.password_check === false){
+                    alert('密碼有誤')
                     return false
                 }
               })
@@ -44,18 +54,21 @@ const Login = (props) => {
         <div className='main'>
             <div className="loginForm">
                 <div className="form-group row">
-                    <label for="inputEmail3" className="col-sm-2 col-form-label">Email</label>
+                    <label for="inputEmail3" className="col-sm-2 col-form-label">Login</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="inputEmail3" placeholder="Login" value={login} onChange={(e) => {setLogin(e.target.value)}} />
+                        <input type="text" className="form-control" id="inputLogin" placeholder="Login" value={login} onChange={(e) => {setLogin(e.target.value)}} />
                     </div>
                 </div>
                 <div className="form-group row">
                     <label for="inputPassword3" className="col-sm-2 col-form-label">Password</label>
                     <div className="col-sm-10">
-                        <input type="password" className="form-control" id="inputPassword3" placeholder="Password" value={password} onChange={(e) => {setPassword(e.target.value)}} />
+                        <input type="password" className="form-control" id="inputPassword" placeholder="Password" value={password} onChange={(e) => {setPassword(e.target.value)}} />
                     </div>
                 </div>
-                <div className="btn btn-primary" onClick={submit}>登入</div>
+                <div className='loginBtn'>
+                    <div className="btn btn-primary" onClick={submit}>登入</div>
+                    <Link to='/registered' className="btn btn-info reBtn">註冊</Link>
+                </div>
             </div>
         </div>
     )

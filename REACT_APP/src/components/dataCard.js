@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react'
-// import DataCard from '../components/dataCard'
 import axios from 'axios'
 
-const Data = () => {
+const DataCard = () => {
     const [data,setData] = useState([]);
     useEffect(() =>{
         const getToken = window.sessionStorage.getItem('token')
@@ -15,7 +14,7 @@ const Data = () => {
     },[])
     // console.log(data, 'data');
     return (
-        <div className='row height'>
+        <>
             {data.map((data) =>{
                 console.log(data, 'f1')
                 return(
@@ -30,8 +29,8 @@ const Data = () => {
                     </div>
                 )
             })}
-        </div>
+        </>
     )
 }
 
-export default Data
+export default DataCard
