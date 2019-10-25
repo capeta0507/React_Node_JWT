@@ -5,8 +5,9 @@ import {Link} from 'react-router-dom'
 const Login = (props) => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
+    
     const submit = () => {
-        // console.log(login,password,'登入')
+        // console.log(login,password,'登入');
         if(login === ''){
             alert('請輸入帳號')
             return false
@@ -54,13 +55,13 @@ const Login = (props) => {
         <div className='main'>
             <div className="loginForm">
                 <div className="form-group row">
-                    <label for="inputEmail3" className="col-sm-2 col-form-label">Login</label>
+                    <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Login</label>
                     <div className="col-sm-10">
                         <input type="text" className="form-control" id="inputLogin" placeholder="Login" value={login} onChange={(e) => {setLogin(e.target.value)}} />
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label for="inputPassword3" className="col-sm-2 col-form-label">Password</label>
+                    <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password</label>
                     <div className="col-sm-10">
                         <input type="password" className="form-control" id="inputPassword" placeholder="Password" value={password} onChange={(e) => {setPassword(e.target.value)}} />
                     </div>
