@@ -69,6 +69,7 @@ const Login = (props) => {
                 <div className='loginBtn'>
                     <div className="btn btn-primary" onClick={submit}>登入</div>
                     <Link to='/registered' className="btn btn-info reBtn">註冊</Link>
+                    <Link to='/forget' className="btn btn-warning reBtn">忘記密碼</Link>
                 </div>
             </div>
         </div>

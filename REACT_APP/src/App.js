@@ -7,6 +7,8 @@ import About from './components/about'
 import Login from './components/login'
 import Data from './components/data'
 import Registered from './components/registered'
+import Forget from './components/forget'
+import UpdatePassword from './components/updatePassword'
 import './App.css';
 
 class App extends Component {
@@ -29,6 +31,12 @@ class App extends Component {
               )}/>
               <Route exact path='/data' render={() => (
                 <Data />
+              )}/>
+              <Route exact path='/forget' render={({history}) => (
+                <Forget onHistory={history}/>
+              )}/>
+              <Route exact path='/UpdatePassword' render={({history}) => (
+                <UpdatePassword onHistory={history} />
               )}/>
             </Switch>
           </div>
