@@ -87,7 +87,7 @@ app.post('/adduser', function (req, res) {
   }
 })
 
-// 忘記密碼處理
+// TODO:忘記密碼處理
 // 取得使用者所傳送過來的 Login，取得使用者的eMail，回傳 eMail 
 // 如果沒有 Login 資料，傳回錯誤訊息，讓使用者去註冊
 // 如果有 Login 資料，回傳 eMail 帳號
