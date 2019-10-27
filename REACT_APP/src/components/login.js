@@ -51,6 +51,31 @@ const Login = (props) => {
               })
         }
     }
+    const forgot = () => {
+        if(login === ''){
+            alert('請輸入帳號')
+            return false
+        } else {
+            axios({
+                method: 'POST',
+                url: '/getemail',
+                data:{
+                  login: login
+                }
+              }).then((response) => {
+                  console.log(response.data)
+                  if(response.data.success === true){
+                    window.sessionStorage.setItem('myLogin',response.data.login)
+                    window.sessionStorage.setItem('myEmail',response.data.email)
+                    props.onHistory.push('/UpdatePassword')
+                  }
+                  if(response.data.success === false){
+                      alert(response.data.message)
+                      props.onHistory.push('/registered')
+                  }
+              })
+        }
+    }
     return (
         <div className='main'>
             <div className="loginForm">
@@ -69,7 +94,8 @@ const Login = (props) => {
                 <div className='loginBtn'>
                     <div className="btn btn-primary" onClick={submit}>登入</div>
                     <Link to='/registered' className="btn btn-info reBtn">註冊</Link>
-                    <Link to='/forget' className="btn btn-warning reBtn">忘記密碼</Link>
+                    {/* <Link to='/forget' className="btn btn-warning reBtn">忘記密碼</Link> */}
+                    <div className="btn btn-warning reBtn" onClick={forgot}>忘記密碼</div>
                 </div>
             </div>
         </div>

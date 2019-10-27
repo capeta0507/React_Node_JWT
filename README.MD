@@ -48,6 +48,6 @@
 "name": "詹政勳"
 "email": "nintendof1@gmail.com"
 "login": "nintendof1"
-"password": "1xK3Yr2Wh"
+"password": "8xK0Yr3Wh"
 ```
 

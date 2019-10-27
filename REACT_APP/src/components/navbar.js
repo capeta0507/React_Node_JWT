@@ -75,7 +75,19 @@ const Navbar = () => {
                                      ) 
                                 }
                             })()}
-                            
+                        </li>
+                        <li className="nav-item">
+                            {(() => {
+                                if(isLogin === true){
+                                    return(
+                                        <>
+                                            <NavLink to='/update' className="btn btn-warning">
+                                                修改個人資料
+                                            </NavLink> 
+                                        </>
+                                    )
+                                }
+                            })()}
                         </li>
                     </ul>
                 </div>
