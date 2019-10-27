@@ -125,7 +125,7 @@ app.post('/getemail',(req,res)=>{
 // 系統根據Login & eMail 產生新的密碼
 // 密碼根據亂數計算，產生6位數字密碼
 // 密碼寫回資料庫，並要求使用者以新密碼登入&立即修改密碼
-app.get('/newpassword',(req,res)=>{
+app.post('/newpassword',(req,res)=>{
   console.log("LOGIN : ",req.body.login);
   console.log("eMail : ",req.body.email);
   let myRandom = ['xK','Yr','Wh']

@@ -38,31 +38,31 @@ const Registered = () => {
     <div className='main'>
       <div className="loginForm">
         <div className="form-group row">
-          <label for="inputEmail3" className="col-sm-2 col-form-label">Name</label>
+          <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Name</label>
           <div className="col-sm-10">
             <input type="text" className="form-control" id="regName" placeholder="Name" value={name} onChange={(e) => {setName(e.target.value)}} />
           </div>
         </div>
         <div className="form-group row">
-          <label for="inputPassword3" className="col-sm-2 col-form-label">Email</label>
+          <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Email</label>
           <div className="col-sm-10">
             <input type="email" className="form-control" id="regEmail" placeholder="Email" value={email} onChange={(e) => {setEmail(e.target.value)}} />
           </div>
         </div>
         <div className="form-group row">
-          <label for="inputEmail3" className="col-sm-2 col-form-label">Login</label>
+          <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Login</label>
           <div className="col-sm-10">
             <input type="text" className="form-control" id="regLogin" placeholder="Login" value={login} onChange={(e) => {setLogin(e.target.value)}} />
           </div>
         </div>
         <div className="form-group row">
-          <label for="inputPassword3" className="col-sm-2 col-form-label">Password</label>
+          <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password</label>
           <div className="col-sm-10">
             <input type="password" className="form-control" id="regPassword" placeholder="Password" value={password} onChange={(e) => {setPassword(e.target.value)}} />
           </div>
         </div>
         <div className="form-group row">
-          <label for="inputPassword3" className="col-sm-2 col-form-label">Password確認</label>
+          <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password確認</label>
           <div className="col-sm-10">
             <input type="password" className="form-control" id="regPassword2" placeholder="Password" value={passwordCheck} onChange={(e) => {setPasswordCheck(e.target.value)}} />
           </div>

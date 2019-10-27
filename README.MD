@@ -41,13 +41,13 @@
 "name": "詹森安"
 "email": "davidtpe@seed.net.tw"
 "login": "davidtpe"
-"password": "5xK2Yr1Wh"
+"password": "8xK9Yr4Wh"
 ```
 ```json=
 "_id": "5d8f875b3a4040098cdfa65c"
 "name": "詹政勳"
 "email": "nintendof1@gmail.com"
 "login": "nintendof1"
-"password": "nintendoformula1"
+"password": "1xK3Yr2Wh"
 ```
 

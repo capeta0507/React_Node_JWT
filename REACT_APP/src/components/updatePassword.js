@@ -11,8 +11,9 @@ const UpdatePassword = (props) => {
     const submit = () => {
         console.log(login, email, 'submit')
         axios({
-            method: 'GET',
+            method: 'POST',
             url: '/newpassword',
+            headers: { 'Content-Type': 'application/json' },
             data:{
                 login: login,
                 email: email
