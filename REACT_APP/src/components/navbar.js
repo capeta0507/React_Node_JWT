@@ -62,8 +62,8 @@ const Navbar = () => {
                                 if(isLogin === true){
                                     return(
                                         <>
-                                            <div className="nav-link myLogout" onClick={logout}>
-                                                {userName}/Logout
+                                            <div className="nav-link myLogout">
+                                                {userName}
                                             </div>
                                         </>
                                     )
@@ -81,7 +81,20 @@ const Navbar = () => {
                                 if(isLogin === true){
                                     return(
                                         <>
-                                            <NavLink to='/update' className="btn btn-warning">
+                                            <div className="btn btn-danger reBtn" onClick={logout}>
+                                                Logout
+                                            </div>
+                                        </>
+                                    )
+                                }
+                            })()}
+                        </li>
+                        <li className="nav-item">
+                            {(() => {
+                                if(isLogin === true){
+                                    return(
+                                        <>
+                                            <NavLink to='/update' className="btn btn-success reBtn">
                                                 修改個人資料
                                             </NavLink> 
                                         </>
