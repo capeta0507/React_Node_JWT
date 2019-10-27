@@ -313,6 +313,43 @@ api.post('/changedata',verifyToken ,(req,res) =>{
   })
 })
 
+// 修改使用者密碼
+// 方法 POST
+// 收到資料：req.body -> lobin,newpassword,confirmpassword
+// 要 middleware 驗證 JWT Token
+api.post('/changepassword',verifyToken ,(req,res) =>{
+  console.log('api/changepassword...(POST)')
+  console.log("login : ",req.body.login);
+  console.log("newpassword : ",req.body.password);
+  console.log("confirmpassword : ",req.body.confirmpassword);
+  // 新資料寫回資料庫
+  User.findOneAndUpdate(
+  {
+    login:req.body.login
+  },
+  {
+    $set: {
+      password: req.body.password
+    }
+  },(err,doc)=>{
+    if(err){
+      console.log('新密碼寫回錯誤');
+      res.json({
+        success:false,
+        message:"新密碼庫寫回錯誤",
+        error:err
+      })
+    }else{
+      console.log('新密碼寫回 OK');
+      res.json({
+        success:true,
+        message:`${req.body.login} 新密碼寫回 OK`,
+        data:doc
+      })
+    }
+  })
+})
+
 app.use('/api', api);
 
 // 以下是 驗證token (middleware)

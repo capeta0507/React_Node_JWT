@@ -41,7 +41,7 @@
 "name": "詹森安"
 "email": "davidtpe@seed.net.tw"
 "login": "davidtpe"
-"password": "8xK9Yr4Wh"
+"password": "David4255"
 ```
 ```json=
 "_id": "5d8f875b3a4040098cdfa65c"
