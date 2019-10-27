@@ -121,7 +121,7 @@ app.post('/getemail',(req,res)=>{
   })
 })
 
-// 修改密碼
+// 忘記密碼 -> 產生新密碼
 // 系統根據Login & eMail 產生新的密碼
 // 密碼根據亂數計算，產生6位數字密碼
 // 密碼寫回資料庫，並要求使用者以新密碼登入&立即修改密碼
@@ -144,7 +144,7 @@ app.post('/newpassword',(req,res)=>{
     $set: {password: newPassword}
   },(err,doc)=>{
     if (err){
-      json({
+      res.json({
         success:false,
         message:"新密碼資料庫寫回錯誤",
         error:err
@@ -172,7 +172,8 @@ app.post('/newpassword',(req,res)=>{
             res.json({
               success:true,
               message:`新密碼寄送成功，請 ${req.body.email} 收信看看`,
-              password:newPassword
+              password:newPassword,
+              data:doc
             })
           }
         }
@@ -180,7 +181,6 @@ app.post('/newpassword',(req,res)=>{
     }
   })
 })
-
 
 // 實做 api route
 var api = express.Router()
@@ -264,7 +264,7 @@ api.post('/login',(req,res)=>{
   });
 })
 
-// 顯示所有使用者，要 middleware驗證Token，
+// 顯示所有使用者，要 middleware 驗證 JWT Token，
 api.get('/users', verifyToken , (req, res)=> {
   User.find({}, function (err, users) {
     res.status(200).json({
@@ -274,6 +274,44 @@ api.get('/users', verifyToken , (req, res)=> {
     })
   })
 });
+
+// 修改使用者資料
+// 方法 POST
+// 收到資料：req.body -> login,name,email
+// 要 middleware 驗證 JWT Token
+api.post('/changedata',verifyToken ,(req,res) =>{
+  console.log('api/changedata...(POST)')
+  console.log("login : ",req.body.login);
+  console.log("name : ",req.body.name);
+  console.log("eMail : ",req.body.email);
+  // 新資料寫回資料庫
+  User.findOneAndUpdate(
+  {
+    login:req.body.login
+  },
+  {
+    $set: {
+      name: req.body.name,
+      email:req.body.email
+    }
+  },(err,doc)=>{
+    if(err){
+      console.log('新資料寫回錯誤');
+      res.json({
+        success:false,
+        message:"新資料庫寫回錯誤",
+        error:err
+      })
+    }else{
+      console.log('新資料寫回 OK');
+      res.json({
+        success:true,
+        message:`${req.body.name},${req.body.email} 新資料寫回 OK`,
+        data:doc
+      })
+    }
+  })
+})
 
 app.use('/api', api);
 
