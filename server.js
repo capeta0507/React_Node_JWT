@@ -38,7 +38,7 @@ app.set('secret', config.secret);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-// TODO:提供靜態檔案顯示
+// NOTE:提供靜態檔案顯示
 app.use('/html', express.static(__dirname + '/html'));
 // 提供React build 靜態檔案顯示
 // app.use('/', express.static(__dirname + '/REACT_APP/build'));
@@ -87,7 +87,7 @@ app.post('/adduser', function (req, res) {
   }
 })
 
-// TODO:忘記密碼處理
+// NOTE:忘記密碼處理
 // 取得使用者所傳送過來的 Login，取得使用者的eMail，回傳 eMail 
 // 如果沒有 Login 資料，傳回錯誤訊息，讓使用者去註冊
 // 如果有 Login 資料，回傳 eMail 帳號
@@ -263,7 +263,6 @@ api.post('/login',(req,res)=>{
     }
   });
 })
-
 // 顯示所有使用者，要 middleware 驗證 JWT Token，
 api.get('/users', verifyToken , (req, res)=> {
   User.find({}, function (err, users) {
@@ -275,7 +274,7 @@ api.get('/users', verifyToken , (req, res)=> {
   })
 });
 
-// 修改使用者資料
+// NOTE:修改使用者資料
 // 方法 POST
 // 收到資料：req.body -> login,name,email
 // 要 middleware 驗證 JWT Token
@@ -312,8 +311,7 @@ api.post('/changedata',verifyToken ,(req,res) =>{
     }
   })
 })
-
-// 修改使用者密碼
+// NOTE:修改使用者密碼
 // 方法 POST
 // 收到資料：req.body -> lobin,newpassword,confirmpassword
 // 要 middleware 驗證 JWT Token

@@ -35,7 +35,7 @@ function submitHandle(e){
   // console.log(my_email_message.html());
 
   let error_Count = 0;
-  // TODO: 1. 所有資料必填 str.length
+  // NOTE: 1. 所有資料必填 str.length
 
   // Email
   // console.log('email len : ',my_email.length);
@@ -100,7 +100,7 @@ function submitHandle(e){
     return false;
   }
 
-  // TODO: 2. Regex 驗證
+  // NOTE: 2. Regex 驗證
 
   // Email
   if (x_isEmail(my_email)){
@@ -157,7 +157,7 @@ function submitHandle(e){
     return false;
   }
 
-  // TODO: 3.特別規定
+  // NOTE: 3.特別規定
 
   // 所在地 必須是高雄
   if (my_country === "KS") {
