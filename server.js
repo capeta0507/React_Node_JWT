@@ -319,7 +319,7 @@ api.post('/changepassword',verifyToken ,(req,res) =>{
   console.log('api/changepassword...(POST)')
   console.log("login : ",req.body.login);
   console.log("newpassword : ",req.body.password);
-  console.log("confirmpassword : ",req.body.confirmpassword);
+  // console.log("confirmpassword : ",req.body.confirmpassword);
   // 新資料寫回資料庫
   User.findOneAndUpdate(
   {
