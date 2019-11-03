@@ -258,7 +258,8 @@ api.post('/login',(req,res)=>{
         message: '認證成功...',
         token: token,
         login : loginUser.login,
-        name: loginUser.name
+        name: loginUser.name,
+        email: loginUser.email
       })
     }
   });

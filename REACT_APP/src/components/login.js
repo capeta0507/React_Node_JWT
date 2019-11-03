@@ -30,6 +30,7 @@ const Login = (props) => {
                     window.sessionStorage.setItem('name',response.data.name)
                     window.sessionStorage.setItem('token',response.data.token)
                     window.sessionStorage.setItem('user',response.data.login)
+                    window.sessionStorage.setItem('email',response.data.email)
                     window.sessionStorage.setItem('res',response.data.success)
                     // props.onHistory.push('/')
                     // 跳轉

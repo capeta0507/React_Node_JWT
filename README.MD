@@ -45,9 +45,9 @@
 ```
 ```json=
 "_id": "5d8f875b3a4040098cdfa65c"
-"name": "詹政勳"
+"name": "小政勳"
 "email": "nintendof1@gmail.com"
 "login": "nintendof1"
-"password": "8xK0Yr3Wh"
+"password": "formula1"
 ```
 

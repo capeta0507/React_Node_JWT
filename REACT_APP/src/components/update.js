@@ -1,4 +1,5 @@
 import React,{useState, useEffect} from 'react'
+import axios from 'axios'
 
 const Update = () => {
 
@@ -7,16 +8,57 @@ const Update = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfig, setPasswordConfig] = useState('')
+    const [token, setToken] = useState('')
 
     useEffect(() => {
         setLogin(window.sessionStorage.getItem('user'))
-    })
+        setToken(window.sessionStorage.getItem('token'))
+        setName(window.sessionStorage.getItem('name'))
+        setEmail(window.sessionStorage.getItem('email'))
+    },[])
 
     const update = () => {
-
+        axios({
+            method: 'POST',
+            url: `/api/changedata?token=${token}`,
+            data:{
+              login: login,
+              name: name,
+              email: email
+            }
+          }
+        ).then((response) => {
+            // console.log(response.data);
+            // console.log(response.data.success);
+            if(response.data.success === true){
+                alert('資料修改完成')
+                window.sessionStorage.setItem('name',name)
+                window.sessionStorage.setItem('email',email)
+                window.location.href = `${window.location.origin}`
+            }
+        })
     }
     const updatePassword = () => {
-
+        // if(password === passwordConfig){
+        //     alert('請確認好密碼')
+        // } else {
+            axios({
+                method: 'POST',
+                url: `/api/changepassword?token=${token}`,
+                data:{
+                  login: login,
+                  password: password
+                }
+              }
+            ).then((response) => {
+                // console.log(response.data);
+                // console.log(response.data.success);
+                if(response.data.success === true){
+                    alert('密碼修改完成')
+                    window.location.href = `${window.location.origin}`
+                }
+            })
+        // }
     }
     return (
         <div className='main'>
